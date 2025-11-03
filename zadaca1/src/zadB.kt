@@ -1,4 +1,3 @@
-
 interface Person{
     fun getIdentity(): String;
     fun getTitle(): String;
@@ -80,9 +79,9 @@ class ElectricarEngineer(
 
 fun main(){
     val s1 = SoftwareEngineer("Adnan", "Hasic", "Softverski inženjer", 5, listOf("Kotlin", "Android", "Firebase"), 12)
-    val s2 = SoftwareEngineer("Dzenan", "Cerkezovic", "Senior Backend inženjer", 8, listOf("Java", "Spring Boot", "PostgreSQL", "AWS"), 35)
+    val s2 = SoftwareEngineer("Dzenan", "Cerkezovic", "Senior Backend inženjer", 8, listOf("Java", "Spring Boot", "PostgreSQL"), 35)
 
-    val e1 = ElectricarEngineer("Alen", "Mahmutovic", "Inženjer elektrotehnike", 10, listOf("PLC programiranje", "Automatika", "SCADA"), 7)
+    val e1 = ElectricarEngineer("Alen", "Mahmutovic", "Inženjer elektrotehnike", 10, listOf("PLC programiranje", "Automatika"), 7)
     val e2 = ElectricarEngineer("Ibrahim", "Selimovic", "Inženjer energetike", 3, listOf("Obnovljivi izvori", "AutoCAD"), 2)
 
     val Engineers = listOf(s1, s2, e1, e2)
@@ -114,6 +113,42 @@ fun main(){
         }
     }
 
+
+    // PROVJERA ZAD B
+    if(Engineers.isNotEmpty()){
+        val mostDiverseEngineer = Engineers.reduce{mostDiverse, currentEng ->
+            var tmp1 = 0
+            //var numberOfExpertisesCurrent = currentEng.expertises.forEach { currentEng -> tmp1++}
+            for (x in currentEng.expertises){tmp1++}
+            var numberOfExpertisesCurrent = tmp1
+            var theMostExperience = 0
+            var tmp2 = 0
+            //var numberOfExpertisesMostDiverse = mostDiverse.expertises.forEach { mostDiverse -> tmp2++ }
+            for (x in mostDiverse.expertises){tmp2++}
+            var numberOfExpertisesMostDiverse = tmp2
+
+            if(numberOfExpertisesMostDiverse > numberOfExpertisesCurrent) {
+                mostDiverse
+            }
+            else if(numberOfExpertisesMostDiverse < numberOfExpertisesCurrent){
+                currentEng
+            }
+            else{
+                if(mostDiverse.experience > currentEng.experience){
+                    mostDiverse
+                }
+                else{
+                    currentEng
+                }
+            }
+        }
+        println("inzenjer sa najvise ekspertiza ili iskustva")
+        mostDiverseEngineer.print()
+
+    }
+    else{
+        println("\n\nlista je prazna")
+    }
 
     //REDUCE ##########################################################################
     val softwareEng: List<SoftwareEngineer> = Engineers.filterIsInstance<SoftwareEngineer>()
